@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">crutkows-FeelsBook</string>
+    <string name="love_button">Love</string>
+    <string name="joy_button">Joy</string>
+    <string name="surprise_button">Surprise</string>
+    <string name="anger_button">Anger</string>
+    <string name="sadness_button">Sadness</string>
+    <string name="fear_button">Fear</string>
+    <string name="input_hint">Comment (Optional)</string>
+    <string name="zero">0</string>
+    <string name="history">History</string>
+</resources>
