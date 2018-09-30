@@ -9,12 +9,12 @@ public class Love extends Emotion {
         super();
     }
 
-    public Love(long time) {
+    public Love(Date time) {
         super(time);
     }
 
     public String getEmotion() {
-        return "love";
+        return "Love";
     }
 }
 

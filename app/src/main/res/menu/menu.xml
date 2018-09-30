@@ -5,6 +5,6 @@
         android:id="@+id/history"
         android:icon="@android:drawable/ic_menu_recent_history"
         android:title="@string/history"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
     <group ></group>
 </menu>

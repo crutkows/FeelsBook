@@ -8,12 +8,12 @@ public class Fear extends Emotion {
         super();
     }
 
-    public Fear(long time) {
+    public Fear(Date time) {
         super(time);
     }
 
     public String getEmotion() {
-        return "fear";
+        return "Fear";
     }
 }
 

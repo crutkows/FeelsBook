@@ -26,19 +26,24 @@ import java.text.SimpleDateFormat;
 public class MainActivity extends AppCompatActivity {
 
     public static final String EMOTION_MESSAGE = "com.example.myfirstapp.EMOTION";
-    private static final String FILENAME = "emotions.sav";
+    public static final int UNIQUE_ID = 1;
+    public static final String ID_MESSAGE = "com.example.myfirstapp.ID";
+    public static final String FILENAME = "emotions.sav";
     private Map<String, Integer> feelingsCount = new HashMap<String, Integer>();
-    private List<Emotion> emotions = new ArrayList<Emotion>();
+    private ArrayList<Emotion> emotions = new ArrayList<Emotion>();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        loadFromFile();
+        initiateDict();
+        updateCount();
     }
 
 
-    
+    /*
     @Override
     public void onStart() {
         super.onStart();
@@ -46,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         initiateDict();
         updateCount();
     }
+    */
 
 
     // Taken from: https://developer.android.com/guide/topics/resources/menu-resource#java
@@ -59,7 +65,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent = new Intent(this, HistoryActivity.class);
-        intent.putExtra(this.EMOTION_MESSAGE, this.FILENAME);
+        intent.putExtra(this.EMOTION_MESSAGE, this.emotions);
+        intent.putExtra(this.ID_MESSAGE, this.UNIQUE_ID);
         startActivity(intent);
         return true;
     }
@@ -71,44 +78,44 @@ public class MainActivity extends AppCompatActivity {
 
         switch (view.getId()) {
             case R.id.love_button:
-                this.feelingsCount.put("love", this.feelingsCount.get("love") + 1);
+                this.feelingsCount.put("Love", this.feelingsCount.get("Love") + 1);
                 feelingCount = findViewById(R.id.love_count);
-                feelingCount.setText(Integer.toString(this.feelingsCount.get("love")));
+                feelingCount.setText(Integer.toString(this.feelingsCount.get("Love")));
                 emotion = new Love();
                 break;
 
             case R.id.joy_button:
-                this.feelingsCount.put("joy", this.feelingsCount.get("joy") + 1);
+                this.feelingsCount.put("Joy", this.feelingsCount.get("Joy") + 1);
                 feelingCount = findViewById(R.id.joy_count);
-                feelingCount.setText(Integer.toString(this.feelingsCount.get("joy")));
+                feelingCount.setText(Integer.toString(this.feelingsCount.get("Joy")));
                 emotion = new Joy();
                 break;
 
             case R.id.surprise_button:
-                this.feelingsCount.put("surprise", this.feelingsCount.get("surprise") + 1);
+                this.feelingsCount.put("Surprise", this.feelingsCount.get("Surprise") + 1);
                 feelingCount = findViewById(R.id.surprise_count);
-                feelingCount.setText(Integer.toString(this.feelingsCount.get("surprise")));
+                feelingCount.setText(Integer.toString(this.feelingsCount.get("Surprise")));
                 emotion = new Surprise();
                 break;
 
             case R.id.anger_button:
-                this.feelingsCount.put("anger", this.feelingsCount.get("anger") + 1);
+                this.feelingsCount.put("Anger", this.feelingsCount.get("Anger") + 1);
                 feelingCount = findViewById(R.id.anger_count);
-                feelingCount.setText(Integer.toString(this.feelingsCount.get("anger")));
+                feelingCount.setText(Integer.toString(this.feelingsCount.get("Anger")));
                 emotion = new Anger();
                 break;
 
             case R.id.sadness_button:
-                this.feelingsCount.put("sadness", this.feelingsCount.get("sadness") + 1);
+                this.feelingsCount.put("Sadness", this.feelingsCount.get("Sadness") + 1);
                 feelingCount = findViewById(R.id.sadness_count);
-                feelingCount.setText(Integer.toString(this.feelingsCount.get("sadness")));
+                feelingCount.setText(Integer.toString(this.feelingsCount.get("Sadness")));
                 emotion = new Sadness();
                 break;
 
             case R.id.fear_button:
-                this.feelingsCount.put("fear", this.feelingsCount.get("fear") + 1);
+                this.feelingsCount.put("Fear", this.feelingsCount.get("Fear") + 1);
                 feelingCount = findViewById(R.id.fear_count);
-                feelingCount.setText(Integer.toString(this.feelingsCount.get("fear")));
+                feelingCount.setText(Integer.toString(this.feelingsCount.get("Fear")));
                 emotion = new Fear();
                 break;
 
@@ -125,12 +132,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initiateDict(){
-        this.feelingsCount.put("love", 0);
-        this.feelingsCount.put("joy", 0);
-        this.feelingsCount.put("surprise", 0);
-        this.feelingsCount.put("anger", 0);
-        this.feelingsCount.put("sadness", 0);
-        this.feelingsCount.put("fear", 0);
+        this.feelingsCount.put("Love", 0);
+        this.feelingsCount.put("Joy", 0);
+        this.feelingsCount.put("Surprise", 0);
+        this.feelingsCount.put("Anger", 0);
+        this.feelingsCount.put("Sadness", 0);
+        this.feelingsCount.put("Fear", 0);
 
         for (Emotion emotion: this.emotions) {
             this.feelingsCount.put(emotion.getEmotion(), this.feelingsCount.get(emotion.getEmotion()) + 1);
@@ -148,22 +155,22 @@ public class MainActivity extends AppCompatActivity {
                 String[] splitLine = line.split("[|]", 3);
 
                 switch (splitLine[1]){
-                    case "love":
+                    case "Love":
                         emotion = new Love();
                         break;
-                    case "joy":
+                    case "Joy":
                         emotion = new Joy();
                         break;
-                    case "surprise":
+                    case "Surprise":
                         emotion = new Surprise();
                         break;
-                    case "anger":
+                    case "Anger":
                         emotion = new Anger();
                         break;
-                    case "sadness":
+                    case "Sadness":
                         emotion = new Sadness();
                         break;
-                    case "fear":
+                    case "Fear":
                         emotion = new Fear();
                         break;
                     default:
@@ -209,22 +216,22 @@ public class MainActivity extends AppCompatActivity {
         TextView feelingCount;
 
         feelingCount = findViewById(R.id.love_count);
-        feelingCount.setText(Integer.toString(this.feelingsCount.get("love")));
+        feelingCount.setText(Integer.toString(this.feelingsCount.get("Love")));
 
         feelingCount = findViewById(R.id.joy_count);
-        feelingCount.setText(Integer.toString(this.feelingsCount.get("joy")));
+        feelingCount.setText(Integer.toString(this.feelingsCount.get("Joy")));
 
         feelingCount = findViewById(R.id.surprise_count);
-        feelingCount.setText(Integer.toString(this.feelingsCount.get("surprise")));
+        feelingCount.setText(Integer.toString(this.feelingsCount.get("Surprise")));
 
         feelingCount = findViewById(R.id.anger_count);
-        feelingCount.setText(Integer.toString(this.feelingsCount.get("anger")));
+        feelingCount.setText(Integer.toString(this.feelingsCount.get("Anger")));
 
         feelingCount = findViewById(R.id.sadness_count);
-        feelingCount.setText(Integer.toString(this.feelingsCount.get("sadness")));
+        feelingCount.setText(Integer.toString(this.feelingsCount.get("Sadness")));
 
         feelingCount = findViewById(R.id.fear_count);
-        feelingCount.setText(Integer.toString(this.feelingsCount.get("fear")));
+        feelingCount.setText(Integer.toString(this.feelingsCount.get("Fear")));
     }
 
 }

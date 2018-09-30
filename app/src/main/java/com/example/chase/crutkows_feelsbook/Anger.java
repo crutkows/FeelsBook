@@ -8,12 +8,12 @@ public class Anger extends Emotion {
         super();
     }
 
-    public Anger(long time) {
+    public Anger(Date time) {
         super(time);
     }
 
     public String getEmotion() {
-        return "anger";
+        return "Anger";
     }
 }
 

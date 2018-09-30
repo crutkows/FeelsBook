@@ -8,11 +8,11 @@ public class Sadness extends Emotion {
         super();
     }
 
-    public Sadness(long time) {
+    public Sadness(Date time) {
         super(time);
     }
 
     public String getEmotion() {
-        return "sadness";
+        return "Sadness";
     }
 }
