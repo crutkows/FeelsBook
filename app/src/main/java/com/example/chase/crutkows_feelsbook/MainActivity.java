@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case "Joy":
                         emotion = new Joy();
-                        break;
+                        break; 
                     case "Surprise":
                         emotion = new Surprise();
                         break;
