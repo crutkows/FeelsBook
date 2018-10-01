@@ -43,16 +43,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    /*
-    @Override
-    public void onStart() {
-        super.onStart();
-        loadFromFile();
-        initiateDict();
-        updateCount();
-    }
-    */
-
 
     // Taken from: https://developer.android.com/guide/topics/resources/menu-resource#java
     @Override
@@ -160,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case "Joy":
                         emotion = new Joy();
-                        break; 
+                        break;
                     case "Surprise":
                         emotion = new Surprise();
                         break;
