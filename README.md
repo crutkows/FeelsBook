@@ -1,3 +1,3 @@
 # FeelsBook
 
-This is Assignment 1 for CMPUT301
+This is assignment 1 for CMPUT 301
