@@ -23,6 +23,12 @@ import java.util.List;
 import java.util.Map;
 import java.text.SimpleDateFormat;
 
+/*
+This is the main activity of the app.
+It handles the recording of an emotion with an optional comment
+along with the counts of all emotions recorded.
+*/
+
 public class MainActivity extends AppCompatActivity {
 
     public static final String EMOTION_MESSAGE = "com.example.myfirstapp.EMOTION";
@@ -37,14 +43,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        loadFromFile();
-        initiateDict();
-        updateCount();
+        loadFromFile(); // Load all emotions stored in file
+        initiateDict(); // Create the dict containing the counts of each emotion
+        updateCount();  // Update the counters in the UI for each emotion
     }
 
 
 
     // Taken from: https://developer.android.com/guide/topics/resources/menu-resource#java
+    // Used to add a button(for history) on the upper app bar.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -52,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    // Called when the History button is clicked
+    // Starts the history activity and passes a list of emotions
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent = new Intent(this, HistoryActivity.class);
@@ -61,11 +70,14 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    // Called when any of the emotion buttons are clicked on the UI
     public void buttonClicked(View view) {
         TextView feelingCount;
         TextView comment;
         Emotion emotion;
 
+        // Switch to figure out which button was pressed and what emotion was recorded
+        // Increments the counter on the UI then creates and add the emotion to the array of emotions
         switch (view.getId()) {
             case R.id.love_button:
                 this.feelingsCount.put("Love", this.feelingsCount.get("Love") + 1);
@@ -114,13 +126,15 @@ public class MainActivity extends AppCompatActivity {
                 emotion = new Love();
         }
 
+        // Adds the inputted comment to the emotion class
         comment = findViewById(R.id.comment_text);
         emotion.setComment(comment.getText().toString());
         this.emotions.add(emotion);
-        comment.setText("");
-        saveInFile(emotion);
+        comment.setText(""); // Reset text input to blank
+        saveInFile(emotion); // Saves the emotion to file
     }
 
+    // Initialize dictionary of counts and get the counts
     private void initiateDict(){
         this.feelingsCount.put("Love", 0);
         this.feelingsCount.put("Joy", 0);
@@ -134,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Taken from LonelyTwitter and modified for usage in my app
     private void loadFromFile() {
         try {
             FileInputStream fis = openFileInput(FILENAME);
@@ -144,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
                 Date date;
                 String[] splitLine = line.split("[|]", 3);
 
+                // Get emotion saved in line and create it
                 switch (splitLine[1]){
                     case "Love":
                         emotion = new Love();
@@ -167,12 +183,15 @@ public class MainActivity extends AppCompatActivity {
                         emotion = new Love();
                 }
 
+                // Set emotion date to date saved in line
                 emotion.setDate(Long.parseLong(splitLine[0]));
 
+                // If a comment exists for the emotion add it
                 if (splitLine.length == 3) {
                     emotion.setComment(splitLine[2]);
                 }
 
+                // add emotion to list of emotions
                 this.emotions.add(emotion);
                 line = in.readLine();
             }
@@ -186,6 +205,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Save an inputted emotion to file
     private void saveInFile(Emotion emotion) {
         try {
             FileOutputStream fos = openFileOutput(FILENAME,
@@ -202,6 +222,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Update the counts shown on the UI
     private void updateCount() {
         TextView feelingCount;
 

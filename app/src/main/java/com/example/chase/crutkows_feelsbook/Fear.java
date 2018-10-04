@@ -2,6 +2,7 @@ package com.example.chase.crutkows_feelsbook;
 
 import java.util.Date;
 
+// Class for Fear emotion
 public class Fear extends Emotion {
 
     public Fear() {
