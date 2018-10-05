@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 
 //This activity allows the user to edit or delete the comment and/or the date contained in an emotion
-public class EditEmotion extends AppCompatActivity {
+public class EditEmotionActivity extends AppCompatActivity {
     public static final int REQUEST_CODE = 3;
     private ArrayList<Emotion> emotions;
     private int index;

@@ -21,7 +21,7 @@
             android:label="@string/history_activity_title"
             android:parentActivityName=".MainActivity"></activity>
         <activity
-            android:name=".EditEmotion"
+            android:name=".EditEmotionActivity"
             android:label="@string/edit_activity_title"
             android:parentActivityName=".HistoryActivity">></activity>
     </application>
